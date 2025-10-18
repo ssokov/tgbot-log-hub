@@ -1,6 +1,6 @@
 ﻿-- =============================================================================
 -- Diagram Name: tgbot-log-hub
--- Created on: 18.10.2025 20:32:28
+-- Created on: 18.10.2025 20:45:12
 -- Diagram Version: 
 -- =============================================================================
 
@@ -50,7 +50,7 @@ CREATE TABLE "service_type" (
 CREATE TABLE "service_user" (
 	"id" BIGSERIAL NOT NULL,
 	"tg_id" int8 NOT NULL DEFAULT -1,
-	"nickname" varchar(255) NOT NULL,
+	"nickname" varchar(255),
 	"params" jsonb,
 	"createdAt" timestamp with time zone NOT NULL DEFAULT now(),
 	PRIMARY KEY("id")
