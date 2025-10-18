@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"apisrv/pkg/db"
+	"tgbot-log-hub/pkg/db"
 
 	"github.com/vmkteam/embedlog"
 	"github.com/vmkteam/zenrpc/v2"

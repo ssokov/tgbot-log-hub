@@ -4,7 +4,7 @@ package vt
 import (
 	"path"
 
-	"apisrv/pkg/db"
+	"tgbot-log-hub/pkg/db"
 )
 
 const (

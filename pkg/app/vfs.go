@@ -3,8 +3,8 @@ package app
 import (
 	"net/http"
 
-	"apisrv/pkg/db"
-	"apisrv/pkg/vt"
+	"tgbot-log-hub/pkg/db"
+	"tgbot-log-hub/pkg/vt"
 
 	"github.com/labstack/echo/v4"
 	"github.com/vmkteam/vfs"

@@ -4,7 +4,7 @@ package vt
 import (
 	"time"
 
-	"apisrv/pkg/db"
+	"tgbot-log-hub/pkg/db"
 )
 
 type User struct {

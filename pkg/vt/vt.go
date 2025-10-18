@@ -1,7 +1,7 @@
 package vt
 
 import (
-	"apisrv/pkg/db"
+	"tgbot-log-hub/pkg/db"
 )
 
 const maxPageSize = 500
