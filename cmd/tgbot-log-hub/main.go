@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
@@ -31,7 +30,6 @@ var (
 	flVerbose          = fs.Bool("verbose", false, "enable debug output")
 	flJSONLogs         = fs.Bool("json", false, "enable json output")
 	flDev              = fs.Bool("dev", false, "enable dev mode")
-	flGenerateTSClient = fs.Bool("ts_client", false, "generate TypeScript vt rpc client and exit")
 	cfg                app.Config
 )
 
@@ -78,20 +76,6 @@ func main() {
 
 	// create & run app
 	a := app.New(appName, sl, cfg, dbc, pgdb)
-
-	// enable vfs
-	if cfg.Server.EnableVFS {
-		err = a.RegisterVFS(cfg.VFS)
-		exitOnError(err)
-	}
-
-	// generate TS client from cmd flags
-	if *flGenerateTSClient {
-		b, er := a.VTTypeScriptClient()
-		exitOnError(er)
-		_, _ = fmt.Fprint(os.Stdout, string(b))
-		os.Exit(0)
-	}
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)

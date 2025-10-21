@@ -15,12 +15,3 @@ ApplicationName = "tgbot-log-hub"
 [Sentry]
 DSN         = ""
 Environment = ""
-
-[VFS]
-MaxFileSize      = 33_554_432 # 32MB
-Path             = "./media/"
-WebPath          = "/media/"
-UploadFormName   = "Filedata"
-SkipFolderVerify = false
-Extensions       = ["jpg", "jpeg", "png", "gif"]
-MimeTypes        = ["image/jpeg", "image/png", "image/gif"]

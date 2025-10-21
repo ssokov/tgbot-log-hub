@@ -1,16 +1,12 @@
 <Project xmlns:xsi="" xmlns:xsd="">
     <Name>tgbot-log-hub.mfd</Name>
     <PackageNames>
-        <string>common</string>
-        <string>vfs</string>
+        <string>tgbot-log-hub</string>
     </PackageNames>
-    <TableMapping>
-        <common>users</common>
-        <vfs>vfsFiles,vfsFolders</vfs>
-    </TableMapping>
     <Languages>
-        <string>ru</string>
+        <string>en</string>
     </Languages>
-    <GoPGVer>10</GoPGVer>
+    <GoPGVer>9</GoPGVer>
     <CustomTypes></CustomTypes>
+    <TableMapping></TableMapping>
 </Project>
