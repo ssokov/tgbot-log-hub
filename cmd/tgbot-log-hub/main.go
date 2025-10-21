@@ -25,12 +25,12 @@ import (
 const appName = "tgbot-log-hub"
 
 var (
-	fs                 = flag.NewFlagSetWithEnvPrefix(os.Args[0], strings.ToUpper(appName), 0)
-	flConfigPath       = fs.String("config", "config.toml", "Path to config file")
-	flVerbose          = fs.Bool("verbose", false, "enable debug output")
-	flJSONLogs         = fs.Bool("json", false, "enable json output")
-	flDev              = fs.Bool("dev", false, "enable dev mode")
-	cfg                app.Config
+	fs           = flag.NewFlagSetWithEnvPrefix(os.Args[0], strings.ToUpper(appName), 0)
+	flConfigPath = fs.String("config", "config.toml", "Path to config file")
+	flVerbose    = fs.Bool("verbose", false, "enable debug output")
+	flJSONLogs   = fs.Bool("json", false, "enable json output")
+	flDev        = fs.Bool("dev", false, "enable dev mode")
+	cfg          app.Config
 )
 
 func main() {

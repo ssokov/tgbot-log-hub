@@ -5,11 +5,11 @@ import (
 	"time"
 
 	"tgbot-log-hub/pkg/db"
+	"tgbot-log-hub/pkg/http"
 
 	"github.com/go-pg/pg/v10"
 	monitor "github.com/hypnoglow/go-pg-monitor"
 	"github.com/labstack/echo/v4"
-	"github.com/vmkteam/appkit"
 	"github.com/vmkteam/embedlog"
 )
 
@@ -42,7 +42,7 @@ func New(appName string, sl embedlog.Logger, cfg Config, db db.DB, dbc *pg.DB) *
 		cfg:     cfg,
 		db:      db,
 		dbc:     dbc,
-		echo:    appkit.NewEcho(),
+		echo:    http.NewRouter(),
 		Logger:  sl,
 	}
 
@@ -51,12 +51,8 @@ func New(appName string, sl embedlog.Logger, cfg Config, db db.DB, dbc *pg.DB) *
 
 // Run is a function that runs application.
 func (a *App) Run(ctx context.Context) error {
-	a.registerMetrics()
-	a.registerHandlers()
-	a.registerDebugHandlers()
-	a.registerMetadata()
 
-	return a.runHTTPServer(ctx, a.cfg.Server.Host, a.cfg.Server.Port)
+	return a.echo.Start(":8080")
 }
 
 // Shutdown is a function that gracefully stops HTTP server.
@@ -66,23 +62,4 @@ func (a *App) Shutdown(timeout time.Duration) error {
 	a.mon.Close()
 
 	return a.echo.Shutdown(ctx)
-}
-
-// registerMetadata is a function that registers meta info from service. Must be updated.
-func (a *App) registerMetadata() {
-	opts := appkit.MetadataOpts{
-		HasPublicAPI:  true,
-		HasPrivateAPI: true,
-		DBs: []appkit.DBMetadata{
-			appkit.NewDBMetadata(a.cfg.Database.Database, a.cfg.Database.PoolSize, false),
-		},
-		Services: []appkit.ServiceMetadata{
-			// NewServiceMetadata("srv", MetadataServiceTypeAsync),
-		},
-	}
-
-	md := appkit.NewMetadataManager(opts)
-	md.RegisterMetrics()
-
-	a.echo.GET("/debug/metadata", md.Handler)
 }
