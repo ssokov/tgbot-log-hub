@@ -14,6 +14,8 @@ import (
 	"tgbot-log-hub/pkg/app"
 	"tgbot-log-hub/pkg/db"
 
+	_ "tgbot-log-hub/docs"
+
 	"github.com/BurntSushi/toml"
 	"github.com/getsentry/sentry-go"
 	"github.com/go-pg/pg/v10"
@@ -33,6 +35,11 @@ var (
 	cfg          app.Config
 )
 
+// @title API for tgbot-log-hub
+// @version 1.0
+// @description API for tgbot-log-hub application. With this api you can fetch logs sent by your telegram bots.
+// @host localhost:8080
+// @BasePath /api
 func main() {
 	flag.DefaultConfigFlagname = "config.flag"
 	exitOnError(fs.Parse(os.Args[1:]))
