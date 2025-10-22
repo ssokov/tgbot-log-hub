@@ -598,8 +598,6 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "API for tgbot-log-hub application. With this api you can fetch logs sent by your telegram bots.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {
