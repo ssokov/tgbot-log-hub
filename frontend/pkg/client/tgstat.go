@@ -34,7 +34,7 @@ func NewClient(endpoint string, header http.Header, httpClient *http.Client) *Cl
 }
 
 type Item struct {
-	Id   string `json:"Id"`
+	ID   string `json:"ID"`
 	Name string `json:"Name"`
 }
 

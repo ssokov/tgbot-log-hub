@@ -8,7 +8,7 @@ import (
 )
 
 type ServiceResponse struct {
-	Id   string `json:"Id"`
+	ID   string `json:"ID"`
 	Name string `json:"Name"`
 }
 
@@ -86,11 +86,10 @@ func (h *ServiceHandler) Register(c echo.Context) error {
 // @Failure 500 {object} ErrorResponse
 // @Router /services/apikey [get]
 func (h *ServiceHandler) GetAPIKey(c echo.Context) error {
-	api_key := "some_api_key_for_service"
+	apiKey := "some_api_key_for_service"
 	return c.JSON(http.StatusOK, APIKeyResponse{
-		APIKey: api_key,
+		APIKey: apiKey,
 	})
-
 }
 
 // GetServices godoc
@@ -103,23 +102,21 @@ func (h *ServiceHandler) GetAPIKey(c echo.Context) error {
 // @Failure 500 {object} ErrorResponse
 // @Router /services [get]
 func (h *ServiceHandler) GetServices(c echo.Context) error {
-	print("GetServices called")
-
 	sr := []ServiceResponse{
 		{
-			Id:   "1",
+			ID:   "1",
 			Name: "ludomania",
 		},
 		{
-			Id:   "2",
+			ID:   "2",
 			Name: "gradeBot",
 		},
 		{
-			Id:   "3",
+			ID:   "3",
 			Name: "tg-digest",
 		},
 		{
-			Id:   "4",
+			ID:   "4",
 			Name: "ai-bot",
 		},
 	}
@@ -161,9 +158,8 @@ func (h *ServiceHandler) DeleteService(c echo.Context) error {
 // @Failure 500 {object} ErrorResponse
 // @Router /services/{id}/logs [get]
 func (h *ServiceHandler) GetLog(c echo.Context) error {
-
 	sr := ServiceResponse{
-		Id:   "1",
+		ID:   "1",
 		Name: "ludomania",
 	}
 	lr := []LogResponse{
@@ -194,7 +190,6 @@ func (h *ServiceHandler) GetLog(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, llr)
-
 }
 
 // GetLogByFilter godoc
