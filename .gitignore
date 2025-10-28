@@ -1,0 +1,6 @@
+.env
+*.secret
+config.local.*
+
+vendor/**/*.yml
+vendor/**/*.json
