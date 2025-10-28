@@ -70,7 +70,7 @@ func (h *ServiceHandler) Register(c echo.Context) error {
 	return nil
 }
 
-// GetApiKey godoc
+// GetAPIKey godoc
 // @Summary Get API Key for a service
 // @Tags Service
 // @Accept json
@@ -81,7 +81,7 @@ func (h *ServiceHandler) Register(c echo.Context) error {
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /services/apikey [get]
-func (h *ServiceHandler) GetApiKey(c echo.Context) error {
+func (h *ServiceHandler) GetAPIKey(c echo.Context) error {
 	return nil
 }
 
@@ -90,7 +90,7 @@ func (h *ServiceHandler) GetApiKey(c echo.Context) error {
 // @Tags Service
 // @Accept json
 // @Produce json
-// @Param admin query bool false "Admin flag to include inactive/hidden services" 
+// @Param admin query bool false "Admin flag to include inactive/hidden services"
 // @Success 200 {object} ServiceListResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /services [get]

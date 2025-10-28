@@ -11,10 +11,9 @@ import (
 	"syscall"
 	"time"
 
+	_ "tgbot-log-hub/docs"
 	"tgbot-log-hub/pkg/app"
 	"tgbot-log-hub/pkg/db"
-
-	_ "tgbot-log-hub/docs"
 
 	"github.com/BurntSushi/toml"
 	"github.com/getsentry/sentry-go"

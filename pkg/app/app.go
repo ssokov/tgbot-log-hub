@@ -51,7 +51,6 @@ func New(appName string, sl embedlog.Logger, cfg Config, db db.DB, dbc *pg.DB) *
 
 // Run is a function that runs application.
 func (a *App) Run(ctx context.Context) error {
-
 	return a.echo.Start(":8080")
 }
 

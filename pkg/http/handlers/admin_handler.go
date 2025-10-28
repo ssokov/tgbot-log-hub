@@ -1,17 +1,16 @@
 package handlers
 
 import (
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 )
 
 type AdminHandler struct{}
 
-type jwtCustomClaims struct {
-	Login string `json:"login"`
-	Email string `json:"email"`
-	jwt.RegisteredClaims
-}
+// type jwtCustomClaims struct {
+// 	Login string `json:"login"`
+// 	Email string `json:"email"`
+// 	jwt.RegisteredClaims
+// }
 
 type RegisterRequest struct {
 	Username string `json:"username" example:"admin"`

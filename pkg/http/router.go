@@ -2,10 +2,10 @@ package http
 
 import (
 	"net/http"
+
 	"tgbot-log-hub/pkg/http/handlers"
 
 	"github.com/labstack/echo/v4"
-
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
@@ -28,7 +28,7 @@ func NewRouter() *echo.Echo {
 
 	// Service routes
 	serviceGroup.POST("/register", serviceHandler.Register)
-	serviceGroup.GET("/apikey", serviceHandler.GetApiKey)
+	serviceGroup.GET("/apikey", serviceHandler.GetAPIKey)
 	serviceGroup.GET("", serviceHandler.GetServices)
 	// serviceGroup.PUT("/:id", serviceHandler.UpdateService)
 	serviceGroup.DELETE("/:id", serviceHandler.DeleteService)

@@ -600,6 +600,7 @@ var SwaggerInfo = &swag.Spec{
 	SwaggerTemplate:  docTemplate,
 }
 
+//nolint:gochecknoinits // This is generated code required by swaggo
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)
 }
