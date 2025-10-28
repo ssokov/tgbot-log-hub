@@ -93,7 +93,7 @@
                 <Search Name="ApiKeyILike" AttrName="ApiKey" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="ServiceAdmina" Namespace="tgbot-log-hub" Table="services_admina">
+        <Entity Name="ServiceAdmins" Namespace="tgbot-log-hub" Table="services_admins">
             <Attributes>
                 <Attribute Name="ServiceID" DBName="service_id" DBType="int8" GoType="int" PK="true" FK="Service" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0"></Attribute>
                 <Attribute Name="AdminID" DBName="admin_id" DBType="int8" GoType="int" PK="true" FK="Admin" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0"></Attribute>

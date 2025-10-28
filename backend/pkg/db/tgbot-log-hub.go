@@ -28,7 +28,7 @@ func NewTgbotLogHubRepo(db orm.DB) TgbotLogHubRepo {
 			Tables.ServiceType.Name:   {{Column: Columns.ServiceType.ID, Direction: SortDesc}},
 			Tables.ServiceUser.Name:   {{Column: Columns.ServiceUser.ID, Direction: SortDesc}},
 			Tables.Service.Name:       {{Column: Columns.Service.ID, Direction: SortDesc}},
-			Tables.ServiceAdmina.Name: {{Column: Columns.ServiceAdmina.ServiceID, Direction: SortDesc}},
+			Tables.ServiceAdmins.Name: {{Column: Columns.ServiceAdmins.ServiceID, Direction: SortDesc}},
 		},
 		join: map[string][]string{
 			Tables.AdminRole.Name:     {TableColumns},
@@ -38,7 +38,7 @@ func NewTgbotLogHubRepo(db orm.DB) TgbotLogHubRepo {
 			Tables.ServiceType.Name:   {TableColumns},
 			Tables.ServiceUser.Name:   {TableColumns},
 			Tables.Service.Name:       {TableColumns, Columns.Service.Type},
-			Tables.ServiceAdmina.Name: {TableColumns, Columns.ServiceAdmina.Service, Columns.ServiceAdmina.Admin},
+			Tables.ServiceAdmins.Name: {TableColumns, Columns.ServiceAdmins.Service, Columns.ServiceAdmins.Admin},
 		},
 	}
 }
@@ -608,27 +608,27 @@ func (tlhr TgbotLogHubRepo) DeleteService(ctx context.Context, id int) (deleted 
 	return res.RowsAffected() > 0, err
 }
 
-/*** ServiceAdmina ***/
+/*** ServiceAdmins ***/
 
-// FullServiceAdmina returns full joins with all columns
-func (tlhr TgbotLogHubRepo) FullServiceAdmina() OpFunc {
-	return WithColumns(tlhr.join[Tables.ServiceAdmina.Name]...)
+// FullServiceAdmins returns full joins with all columns
+func (tlhr TgbotLogHubRepo) FullServiceAdmins() OpFunc {
+	return WithColumns(tlhr.join[Tables.ServiceAdmins.Name]...)
 }
 
-// DefaultServiceAdminaSort returns default sort.
-func (tlhr TgbotLogHubRepo) DefaultServiceAdminaSort() OpFunc {
-	return WithSort(tlhr.sort[Tables.ServiceAdmina.Name]...)
+// DefaultServiceAdminsSort returns default sort.
+func (tlhr TgbotLogHubRepo) DefaultServiceAdminsSort() OpFunc {
+	return WithSort(tlhr.sort[Tables.ServiceAdmins.Name]...)
 }
 
-// ServiceAdminaByID is a function that returns ServiceAdmina by ID(s) or nil.
-func (tlhr TgbotLogHubRepo) ServiceAdminaByID(ctx context.Context, serviceID int, adminID int, ops ...OpFunc) (*ServiceAdmina, error) {
-	return tlhr.OneServiceAdmina(ctx, &ServiceAdminaSearch{ServiceID: &serviceID, AdminID: &adminID}, ops...)
+// ServiceAdminsByID is a function that returns ServiceAdmins by ID(s) or nil.
+func (tlhr TgbotLogHubRepo) ServiceAdminsByID(ctx context.Context, serviceID int, adminID int, ops ...OpFunc) (*ServiceAdmins, error) {
+	return tlhr.OneServiceAdmins(ctx, &ServiceAdminsSearch{ServiceID: &serviceID, AdminID: &adminID}, ops...)
 }
 
-// OneServiceAdmina is a function that returns one ServiceAdmina by filters. It could return pg.ErrMultiRows.
-func (tlhr TgbotLogHubRepo) OneServiceAdmina(ctx context.Context, search *ServiceAdminaSearch, ops ...OpFunc) (*ServiceAdmina, error) {
-	obj := &ServiceAdmina{}
-	err := buildQuery(ctx, tlhr.db, obj, search, tlhr.filters[Tables.ServiceAdmina.Name], PagerTwo, ops...).Select()
+// OneServiceAdmins is a function that returns one ServiceAdmins by filters. It could return pg.ErrMultiRows.
+func (tlhr TgbotLogHubRepo) OneServiceAdmins(ctx context.Context, search *ServiceAdminsSearch, ops ...OpFunc) (*ServiceAdmins, error) {
+	obj := &ServiceAdmins{}
+	err := buildQuery(ctx, tlhr.db, obj, search, tlhr.filters[Tables.ServiceAdmins.Name], PagerTwo, ops...).Select()
 
 	if errors.Is(err, pg.ErrMultiRows) {
 		return nil, err
@@ -639,31 +639,31 @@ func (tlhr TgbotLogHubRepo) OneServiceAdmina(ctx context.Context, search *Servic
 	return obj, err
 }
 
-// ServiceAdminasByFilters returns ServiceAdmina list.
-func (tlhr TgbotLogHubRepo) ServiceAdminasByFilters(ctx context.Context, search *ServiceAdminaSearch, pager Pager, ops ...OpFunc) (serviceAdminas []ServiceAdmina, err error) {
-	err = buildQuery(ctx, tlhr.db, &serviceAdminas, search, tlhr.filters[Tables.ServiceAdmina.Name], pager, ops...).Select()
+// ServiceAdminsByFilters returns ServiceAdmins list.
+func (tlhr TgbotLogHubRepo) ServiceAdminsByFilters(ctx context.Context, search *ServiceAdminsSearch, pager Pager, ops ...OpFunc) (serviceAdminsList []ServiceAdmins, err error) {
+	err = buildQuery(ctx, tlhr.db, &serviceAdminsList, search, tlhr.filters[Tables.ServiceAdmins.Name], pager, ops...).Select()
 	return
 }
 
-// CountServiceAdminas returns count
-func (tlhr TgbotLogHubRepo) CountServiceAdminas(ctx context.Context, search *ServiceAdminaSearch, ops ...OpFunc) (int, error) {
-	return buildQuery(ctx, tlhr.db, &ServiceAdmina{}, search, tlhr.filters[Tables.ServiceAdmina.Name], PagerOne, ops...).Count()
+// CountServiceAdmins returns count
+func (tlhr TgbotLogHubRepo) CountServiceAdmins(ctx context.Context, search *ServiceAdminsSearch, ops ...OpFunc) (int, error) {
+	return buildQuery(ctx, tlhr.db, &ServiceAdmins{}, search, tlhr.filters[Tables.ServiceAdmins.Name], PagerOne, ops...).Count()
 }
 
-// AddServiceAdmina adds ServiceAdmina to DB.
-func (tlhr TgbotLogHubRepo) AddServiceAdmina(ctx context.Context, serviceAdmina *ServiceAdmina, ops ...OpFunc) (*ServiceAdmina, error) {
-	q := tlhr.db.ModelContext(ctx, serviceAdmina)
+// AddServiceAdmins adds ServiceAdmins to DB.
+func (tlhr TgbotLogHubRepo) AddServiceAdmins(ctx context.Context, serviceAdmins *ServiceAdmins, ops ...OpFunc) (*ServiceAdmins, error) {
+	q := tlhr.db.ModelContext(ctx, serviceAdmins)
 	applyOps(q, ops...)
 	_, err := q.Insert()
 
-	return serviceAdmina, err
+	return serviceAdmins, err
 }
 
-// UpdateServiceAdmina updates ServiceAdmina in DB.
-func (tlhr TgbotLogHubRepo) UpdateServiceAdmina(ctx context.Context, serviceAdmina *ServiceAdmina, ops ...OpFunc) (bool, error) {
-	q := tlhr.db.ModelContext(ctx, serviceAdmina).WherePK()
+// UpdateServiceAdmins updates ServiceAdmins in DB.
+func (tlhr TgbotLogHubRepo) UpdateServiceAdmins(ctx context.Context, serviceAdmins *ServiceAdmins, ops ...OpFunc) (bool, error) {
+	q := tlhr.db.ModelContext(ctx, serviceAdmins).WherePK()
 	if len(ops) == 0 {
-		q = q.ExcludeColumn(Columns.ServiceAdmina.ServiceID, Columns.ServiceAdmina.AdminID)
+		q = q.ExcludeColumn(Columns.ServiceAdmins.ServiceID, Columns.ServiceAdmins.AdminID)
 	}
 	applyOps(q, ops...)
 	res, err := q.Update()
@@ -674,11 +674,11 @@ func (tlhr TgbotLogHubRepo) UpdateServiceAdmina(ctx context.Context, serviceAdmi
 	return res.RowsAffected() > 0, err
 }
 
-// DeleteServiceAdmina deletes ServiceAdmina from DB.
-func (tlhr TgbotLogHubRepo) DeleteServiceAdmina(ctx context.Context, serviceID int, adminID int) (deleted bool, err error) {
-	serviceAdmina := &ServiceAdmina{ServiceID: serviceID, AdminID: adminID}
+// DeleteServiceAdmins deletes ServiceAdmins from DB.
+func (tlhr TgbotLogHubRepo) DeleteServiceAdmins(ctx context.Context, serviceID int, adminID int) (deleted bool, err error) {
+	serviceAdmins := &ServiceAdmins{ServiceID: serviceID, AdminID: adminID}
 
-	res, err := tlhr.db.ModelContext(ctx, serviceAdmina).WherePK().Delete()
+	res, err := tlhr.db.ModelContext(ctx, serviceAdmins).WherePK().Delete()
 	if err != nil {
 		return false, err
 	}

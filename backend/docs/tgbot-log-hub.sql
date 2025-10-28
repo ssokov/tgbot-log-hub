@@ -1,6 +1,6 @@
 ﻿-- =============================================================================
 -- Diagram Name: tgbot-log-hub
--- Created on: 21.10.2025 14:44:03
+-- Created on: 29.10.2025 00:18:52
 -- Diagram Version: 
 -- =============================================================================
 
@@ -24,7 +24,7 @@ CREATE TABLE "admins" (
 	CONSTRAINT "uk_admin_email" UNIQUE("email")
 );
 
-CREATE TABLE "services_admina" (
+CREATE TABLE "services_admins" (
 	"service_id" int8 NOT NULL,
 	"admin_id" int8 NOT NULL,
 	"assigned_at" timestamp with time zone NOT NULL DEFAULT now(),
@@ -82,14 +82,14 @@ ALTER TABLE "admins" ADD CONSTRAINT "Ref_admin_to_admin_role" FOREIGN KEY ("role
 	ON UPDATE NO ACTION
 	NOT DEFERRABLE;
 
-ALTER TABLE "services_admina" ADD CONSTRAINT "Ref_service_admin_to_service" FOREIGN KEY ("service_id")
+ALTER TABLE "services_admins" ADD CONSTRAINT "Ref_service_admin_to_service" FOREIGN KEY ("service_id")
 	REFERENCES "services"("id")
 	MATCH SIMPLE
 	ON DELETE NO ACTION
 	ON UPDATE NO ACTION
 	NOT DEFERRABLE;
 
-ALTER TABLE "services_admina" ADD CONSTRAINT "Ref_service_admin_to_admin" FOREIGN KEY ("admin_id")
+ALTER TABLE "services_admins" ADD CONSTRAINT "Ref_service_admin_to_admin" FOREIGN KEY ("admin_id")
 	REFERENCES "admins"("id")
 	MATCH SIMPLE
 	ON DELETE NO ACTION

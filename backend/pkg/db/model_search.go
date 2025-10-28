@@ -412,7 +412,7 @@ func (ss *ServiceSearch) Q() applier {
 	}
 }
 
-type ServiceAdminaSearch struct {
+type ServiceAdminsSearch struct {
 	search
 
 	ServiceID  *int
@@ -422,24 +422,24 @@ type ServiceAdminaSearch struct {
 	AdminIDs   []int
 }
 
-func (sas *ServiceAdminaSearch) Apply(query *orm.Query) *orm.Query {
+func (sas *ServiceAdminsSearch) Apply(query *orm.Query) *orm.Query {
 	if sas == nil {
 		return query
 	}
 	if sas.ServiceID != nil {
-		sas.where(query, Tables.ServiceAdmina.Alias, Columns.ServiceAdmina.ServiceID, sas.ServiceID)
+		sas.where(query, Tables.ServiceAdmins.Alias, Columns.ServiceAdmins.ServiceID, sas.ServiceID)
 	}
 	if sas.AdminID != nil {
-		sas.where(query, Tables.ServiceAdmina.Alias, Columns.ServiceAdmina.AdminID, sas.AdminID)
+		sas.where(query, Tables.ServiceAdmins.Alias, Columns.ServiceAdmins.AdminID, sas.AdminID)
 	}
 	if sas.AssignedAt != nil {
-		sas.where(query, Tables.ServiceAdmina.Alias, Columns.ServiceAdmina.AssignedAt, sas.AssignedAt)
+		sas.where(query, Tables.ServiceAdmins.Alias, Columns.ServiceAdmins.AssignedAt, sas.AssignedAt)
 	}
 	if len(sas.ServiceIDs) > 0 {
-		Filter{Columns.ServiceAdmina.ServiceID, sas.ServiceIDs, SearchTypeArray, false}.Apply(query)
+		Filter{Columns.ServiceAdmins.ServiceID, sas.ServiceIDs, SearchTypeArray, false}.Apply(query)
 	}
 	if len(sas.AdminIDs) > 0 {
-		Filter{Columns.ServiceAdmina.AdminID, sas.AdminIDs, SearchTypeArray, false}.Apply(query)
+		Filter{Columns.ServiceAdmins.AdminID, sas.AdminIDs, SearchTypeArray, false}.Apply(query)
 	}
 
 	sas.apply(query)
@@ -447,7 +447,7 @@ func (sas *ServiceAdminaSearch) Apply(query *orm.Query) *orm.Query {
 	return query
 }
 
-func (sas *ServiceAdminaSearch) Q() applier {
+func (sas *ServiceAdminsSearch) Q() applier {
 	return func(query *orm.Query) (*orm.Query, error) {
 		if sas == nil {
 			return query, nil

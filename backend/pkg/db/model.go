@@ -36,7 +36,7 @@ var Columns = struct {
 
 		Type string
 	}
-	ServiceAdmina struct {
+	ServiceAdmins struct {
 		ServiceID, AdminID, AssignedAt string
 
 		Service, Admin string
@@ -117,7 +117,7 @@ var Columns = struct {
 
 		Type: "Type",
 	},
-	ServiceAdmina: struct {
+	ServiceAdmins: struct {
 		ServiceID, AdminID, AssignedAt string
 
 		Service, Admin string
@@ -153,7 +153,7 @@ var Tables = struct {
 	Service struct {
 		Name, Alias string
 	}
-	ServiceAdmina struct {
+	ServiceAdmins struct {
 		Name, Alias string
 	}
 }{
@@ -199,10 +199,10 @@ var Tables = struct {
 		Name:  "services",
 		Alias: "t",
 	},
-	ServiceAdmina: struct {
+	ServiceAdmins: struct {
 		Name, Alias string
 	}{
-		Name:  "services_admina",
+		Name:  "services_admins",
 		Alias: "t",
 	},
 }
@@ -226,7 +226,7 @@ type Admin struct {
 	Status       int       `pg:"status,use_zero"`
 	CreatedAt    time.Time `pg:"created_at,use_zero"`
 
-	Role *AdminRole `pg:"fk:role_id"`
+	Role *AdminRole `pg:"fk:role_id,rel:has-one"`
 }
 
 type LogType struct {
@@ -248,9 +248,9 @@ type ServiceLog struct {
 	AdditionalData *ServiceLogAdditionalData `pg:"additional_data"`
 	CreatedAt      time.Time                 `pg:"created_at,use_zero"`
 
-	Type    *LogType     `pg:"fk:type_id"`
-	Service *Service     `pg:"fk:service_id"`
-	User    *ServiceUser `pg:"fk:user_id"`
+	Type    *LogType     `pg:"fk:type_id,rel:has-one"`
+	Service *Service     `pg:"fk:service_id,rel:has-one"`
+	User    *ServiceUser `pg:"fk:user_id,rel:has-one"`
 }
 
 type ServiceType struct {
@@ -280,16 +280,16 @@ type Service struct {
 	Status    int       `pg:"status,use_zero"`
 	CreatedAt time.Time `pg:"created_at,use_zero"`
 
-	Type *ServiceType `pg:"fk:type_id"`
+	Type *ServiceType `pg:"fk:type_id,rel:has-one"`
 }
 
-type ServiceAdmina struct {
-	tableName struct{} `pg:"services_admina,alias:t,discard_unknown_columns"`
+type ServiceAdmins struct {
+	tableName struct{} `pg:"services_admins,alias:t,discard_unknown_columns"`
 
 	ServiceID  int       `pg:"service_id,pk"`
 	AdminID    int       `pg:"admin_id,pk"`
 	AssignedAt time.Time `pg:"assigned_at,use_zero"`
 
-	Service *Service `pg:"fk:service_id"`
-	Admin   *Admin   `pg:"fk:admin_id"`
+	Service *Service `pg:"fk:service_id,rel:has-one"`
+	Admin   *Admin   `pg:"fk:admin_id,rel:has-one"`
 }
