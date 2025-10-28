@@ -1,0 +1,17 @@
+[Server]
+Host      = "localhost"
+Port      = 8075
+IsDevel   = true
+EnableVFS = true
+
+[Database]
+Addr            = "localhost:5432"
+User            = "postgres"
+Database        = "tgbot-log-hub"
+Password        = ""
+PoolSize        = 5
+ApplicationName = "tgbot-log-hub"
+
+[Sentry]
+DSN         = ""
+Environment = ""
