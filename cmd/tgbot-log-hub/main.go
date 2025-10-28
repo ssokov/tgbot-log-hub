@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	_ "tgbot-log-hub/docs"
 	"tgbot-log-hub/pkg/app"
 	"tgbot-log-hub/pkg/db"
 
@@ -25,14 +26,19 @@ import (
 const appName = "tgbot-log-hub"
 
 var (
-	fs                 = flag.NewFlagSetWithEnvPrefix(os.Args[0], strings.ToUpper(appName), 0)
-	flConfigPath       = fs.String("config", "config.toml", "Path to config file")
-	flVerbose          = fs.Bool("verbose", false, "enable debug output")
-	flJSONLogs         = fs.Bool("json", false, "enable json output")
-	flDev              = fs.Bool("dev", false, "enable dev mode")
-	cfg                app.Config
+	fs           = flag.NewFlagSetWithEnvPrefix(os.Args[0], strings.ToUpper(appName), 0)
+	flConfigPath = fs.String("config", "config.toml", "Path to config file")
+	flVerbose    = fs.Bool("verbose", false, "enable debug output")
+	flJSONLogs   = fs.Bool("json", false, "enable json output")
+	flDev        = fs.Bool("dev", false, "enable dev mode")
+	cfg          app.Config
 )
 
+// @title API for tgbot-log-hub
+// @version 1.0
+// @description API for tgbot-log-hub application. With this api you can fetch logs sent by your telegram bots.
+// @host localhost:8080
+// @BasePath /api
 func main() {
 	flag.DefaultConfigFlagname = "config.flag"
 	exitOnError(fs.Parse(os.Args[1:]))
