@@ -1,6 +1,6 @@
-.env
-*.secret
-config.local.*
-
+.idea
+.vscode
+cfg/local.toml
+Makefile.mk
 vendor/**/*.yml
 vendor/**/*.json
