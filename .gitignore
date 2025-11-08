@@ -1,6 +1,6 @@
 .idea
 .vscode
 cfg/local.toml
-coverage.txt
-coverage.xml
 Makefile.mk
+vendor/**/*.yml
+vendor/**/*.json
