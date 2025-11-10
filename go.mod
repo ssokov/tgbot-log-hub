@@ -13,8 +13,9 @@ require (
 	github.com/swaggo/swag v1.8.12
 	github.com/vmkteam/appkit v0.0.1
 	github.com/vmkteam/embedlog v0.1.3
+	github.com/vmkteam/rpcgen/v2 v2.5.0
 	github.com/vmkteam/zenrpc-middleware v1.3.0
-	github.com/vmkteam/zenrpc/v2 v2.2.12
+	github.com/vmkteam/zenrpc/v2 v2.3.0
 )
 
 require (
@@ -26,12 +27,15 @@ require (
 	github.com/go-openapi/jsonreference v0.19.6 // indirect
 	github.com/go-openapi/spec v0.20.4 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
+	github.com/iancoleman/orderedmap v0.2.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/prometheus/client_golang v1.23.2 // indirect
-	github.com/smartystreets/goconvey v1.8.1 // indirect
 	github.com/swaggo/files/v2 v2.0.0 // indirect
+	github.com/vmkteam/meta-schema/v2 v2.0.1 // indirect
+	github.com/vmkteam/zenrpc v1.1.1 // indirect
 	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/time v0.11.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
@@ -51,7 +55,6 @@ require (
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.66.1 // indirect
 	github.com/prometheus/procfs v0.17.0 // indirect
-	github.com/smarty/assertions v1.16.0 // indirect
 	github.com/swaggo/echo-swagger v1.4.1
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -61,12 +64,12 @@ require (
 	github.com/vmihailenco/tagparser v0.1.2 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
-	golang.org/x/mod v0.27.0 // indirect
+	golang.org/x/mod v0.28.0 // indirect
 	golang.org/x/net v0.44.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
 	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.29.0 // indirect
-	golang.org/x/tools v0.36.0 // indirect
+	golang.org/x/tools v0.37.0 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.36.9 // indirect
 	mellium.im/sasl v0.3.2 // indirect

@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"github.com/vmkteam/zenrpc/v2"
 	"time"
 
 	"logs-hub-backend/pkg/db"
@@ -34,6 +35,7 @@ type App struct {
 	dbc     *pg.DB
 	mon     *monitor.Monitor
 	echo    *echo.Echo
+	srv     *zenrpc.Server
 }
 
 func New(appName string, sl embedlog.Logger, cfg Config, db db.DB, dbc *pg.DB) *App {
@@ -51,14 +53,15 @@ func New(appName string, sl embedlog.Logger, cfg Config, db db.DB, dbc *pg.DB) *
 
 // Run is a function that runs application.
 func (a *App) Run(ctx context.Context) error {
-	return a.echo.Start(":8080")
+	a.registerDebugHandlers()
+	return a.runHTTPServer(ctx, a.cfg.Server.Host, a.cfg.Server.Port)
 }
 
 // Shutdown is a function that gracefully stops HTTP server.
 func (a *App) Shutdown(timeout time.Duration) error {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
-	a.mon.Close()
+	//a.mon.Close()
 
 	return a.echo.Shutdown(ctx)
 }
