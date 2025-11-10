@@ -594,8 +594,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8080",
 	BasePath:         "/api",
 	Schemes:          []string{},
-	Title:            "API for tgbot-log-hub",
-	Description:      "API for tgbot-log-hub application. With this api you can fetch logs sent by your telegram bots.",
+	Title:            "API for logs-hub-backend",
+	Description:      "API for logs-hub-backend application. With this api you can fetch logs sent by your telegram bots.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

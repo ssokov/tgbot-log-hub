@@ -1,7 +1,7 @@
 <Project xmlns:xsi="" xmlns:xsd="">
-    <Name>tgbot-log-hub.mfd</Name>
+    <Name>logs-hub-backend.mfd</Name>
     <PackageNames>
-        <string>tgbot-log-hub</string>
+        <string>logs-hub-backend</string>
     </PackageNames>
     <Languages>
         <string>en</string>

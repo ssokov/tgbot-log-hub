@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	_ "tgbot-log-hub/docs"
-	"tgbot-log-hub/pkg/app"
-	"tgbot-log-hub/pkg/db"
+	_ "logs-hub-backend/docs"
+	"logs-hub-backend/pkg/app"
+	"logs-hub-backend/pkg/db"
 
 	"github.com/BurntSushi/toml"
 	"github.com/getsentry/sentry-go"
@@ -23,7 +23,7 @@ import (
 	"github.com/vmkteam/embedlog"
 )
 
-const appName = "tgbot-log-hub"
+const appName = "logs-hub-backend"
 
 var (
 	fs           = flag.NewFlagSetWithEnvPrefix(os.Args[0], strings.ToUpper(appName), 0)
@@ -34,9 +34,9 @@ var (
 	cfg          app.Config
 )
 
-// @title API for tgbot-log-hub
+// @title API for logs-hub-backend
 // @version 1.0
-// @description API for tgbot-log-hub application. With this api you can fetch logs sent by your telegram bots.
+// @description API for logs-hub-backend application. With this api you can fetch logs sent by your telegram bots.
 // @host localhost:8080
 // @BasePath /api
 func main() {

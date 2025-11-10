@@ -1,30 +1,28 @@
-name: golangci-lint
+name: Go Linters
+
 on:
   push:
-    tags:
-      - v*
-    branches:
-      - master
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 permissions:
   contents: read
   pull-requests: read
 
 jobs:
-  lint-backend:
-    name: lint-backend
+  lint-go:
+    name: lint-go
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
     steps:
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v4
+      
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
           go-version: '1.24.x'
-      - uses: actions/checkout@v4
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v7
+          
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v3
         with:
-          version: v2.4.0
-          working-directory: backend
+          version: latest

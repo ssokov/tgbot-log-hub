@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ARG CI_PROJECT_NAME=tgbot-log-hub
+ARG CI_PROJECT_NAME=logs-hub-backend
 ENV CI_PROJECT_NAME=$CI_PROJECT_NAME
 
 RUN apk --no-cache add ca-certificates tzdata

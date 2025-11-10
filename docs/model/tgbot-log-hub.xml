@@ -1,7 +1,7 @@
 <Package xmlns:xsi="" xmlns:xsd="">
-    <Name>tgbot-log-hub</Name>
+    <Name>logs-hub-backend</Name>
     <Entities>
-        <Entity Name="AdminRole" Namespace="tgbot-log-hub" Table="admin_roles">
+        <Entity Name="AdminRole" Namespace="logs-hub-backend" Table="admin_roles">
             <Attributes>
                 <Attribute Name="ID" DBName="id" DBType="int4" GoType="int" PK="true" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0" HasDefault="true"></Attribute>
                 <Attribute Name="RoleName" DBName="role_name" DBType="varchar" GoType="string" PK="false" Nullable="No" Addable="true" Updatable="true" Min="0" Max="255"></Attribute>
@@ -12,7 +12,7 @@
                 <Search Name="RoleNameILike" AttrName="RoleName" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="Admin" Namespace="tgbot-log-hub" Table="admins">
+        <Entity Name="Admin" Namespace="logs-hub-backend" Table="admins">
             <Attributes>
                 <Attribute Name="ID" DBName="id" DBType="int8" GoType="int" PK="true" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0" HasDefault="true"></Attribute>
                 <Attribute Name="Login" DBName="login" DBType="varchar" GoType="string" PK="false" Nullable="No" Addable="true" Updatable="true" Min="0" Max="255"></Attribute>
@@ -29,7 +29,7 @@
                 <Search Name="PasswordHashILike" AttrName="PasswordHash" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="LogType" Namespace="tgbot-log-hub" Table="log_types">
+        <Entity Name="LogType" Namespace="logs-hub-backend" Table="log_types">
             <Attributes>
                 <Attribute Name="ID" DBName="id" DBType="int8" GoType="int" PK="true" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0" HasDefault="true"></Attribute>
                 <Attribute Name="TypeName" DBName="type_name" DBType="varchar" GoType="string" PK="false" Nullable="No" Addable="true" Updatable="true" Min="0" Max="255"></Attribute>
@@ -39,7 +39,7 @@
                 <Search Name="TypeNameILike" AttrName="TypeName" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="ServiceLog" Namespace="tgbot-log-hub" Table="service_logs">
+        <Entity Name="ServiceLog" Namespace="logs-hub-backend" Table="service_logs">
             <Attributes>
                 <Attribute Name="ID" DBName="id" DBType="int8" GoType="int" PK="true" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0" HasDefault="true"></Attribute>
                 <Attribute Name="TypeID" DBName="type_id" DBType="int8" GoType="int" PK="false" FK="LogType" Nullable="No" Addable="true" Updatable="true" Min="0" Max="0"></Attribute>
@@ -55,7 +55,7 @@
                 <Search Name="MessageILike" AttrName="Message" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="ServiceType" Namespace="tgbot-log-hub" Table="service_types">
+        <Entity Name="ServiceType" Namespace="logs-hub-backend" Table="service_types">
             <Attributes>
                 <Attribute Name="ID" DBName="id" DBType="int4" GoType="int" PK="true" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0" HasDefault="true"></Attribute>
                 <Attribute Name="TypeName" DBName="type_name" DBType="varchar" GoType="string" PK="false" Nullable="No" Addable="true" Updatable="true" Min="0" Max="255"></Attribute>
@@ -65,7 +65,7 @@
                 <Search Name="TypeNameILike" AttrName="TypeName" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="ServiceUser" Namespace="tgbot-log-hub" Table="service_users">
+        <Entity Name="ServiceUser" Namespace="logs-hub-backend" Table="service_users">
             <Attributes>
                 <Attribute Name="ID" DBName="id" DBType="int8" GoType="int" PK="true" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0" HasDefault="true"></Attribute>
                 <Attribute Name="TgID" DBName="tg_id" DBType="int8" GoType="int" PK="false" Nullable="No" Addable="true" Updatable="true" Min="0" Max="0" HasDefault="true"></Attribute>
@@ -78,7 +78,7 @@
                 <Search Name="NicknameILike" AttrName="Nickname" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="Service" Namespace="tgbot-log-hub" Table="services">
+        <Entity Name="Service" Namespace="logs-hub-backend" Table="services">
             <Attributes>
                 <Attribute Name="ID" DBName="id" DBType="int8" GoType="int" PK="true" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0" HasDefault="true"></Attribute>
                 <Attribute Name="Name" DBName="name" DBType="varchar" GoType="string" PK="false" Nullable="No" Addable="true" Updatable="true" Min="0" Max="255"></Attribute>
@@ -93,7 +93,7 @@
                 <Search Name="ApiKeyILike" AttrName="ApiKey" SearchType="SEARCHTYPE_ILIKE"></Search>
             </Searches>
         </Entity>
-        <Entity Name="ServiceAdmins" Namespace="tgbot-log-hub" Table="services_admins">
+        <Entity Name="ServiceAdmins" Namespace="logs-hub-backend" Table="services_admins">
             <Attributes>
                 <Attribute Name="ServiceID" DBName="service_id" DBType="int8" GoType="int" PK="true" FK="Service" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0"></Attribute>
                 <Attribute Name="AdminID" DBName="admin_id" DBType="int8" GoType="int" PK="true" FK="Admin" Nullable="Yes" Addable="true" Updatable="false" Min="0" Max="0"></Attribute>

@@ -109,9 +109,9 @@ definitions:
 host: localhost:8080
 info:
   contact: {}
-  description: API for tgbot-log-hub application. With this api you can fetch logs
+  description: API for logs-hub-backend application. With this api you can fetch logs
     sent by your telegram bots.
-  title: API for tgbot-log-hub
+  title: API for logs-hub-backend
   version: "1.0"
 paths:
   /{id}/services/logs/filter:

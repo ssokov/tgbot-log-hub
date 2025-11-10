@@ -1,10 +1,10 @@
 # project service name
-NAME := tgbot-log-hub
+NAME := logs-hub-backend
 
 # local database connection settings
-TEST_PGDATABASE ?= test-tgbot-log-hub
+TEST_PGDATABASE ?= test-logs-hub-backend
 
-PGDATABASE ?= tgbot-log-hub
+PGDATABASE ?= logs-hub-backend
 PGHOST ?= localhost
 PGPORT ?= 5432
 PGUSER ?= postgres

@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"tgbot-log-hub/pkg/db"
-	"tgbot-log-hub/pkg/http"
+	"logs-hub-backend/pkg/db"
+	"logs-hub-backend/pkg/http"
 
 	"github.com/go-pg/pg/v10"
 	monitor "github.com/hypnoglow/go-pg-monitor"

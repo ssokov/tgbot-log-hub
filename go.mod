@@ -1,4 +1,4 @@
-module tgbot-log-hub
+module logs-hub-backend
 
 go 1.24.5
 

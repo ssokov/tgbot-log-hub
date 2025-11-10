@@ -3,7 +3,7 @@ package http
 import (
 	"net/http"
 
-	"tgbot-log-hub/pkg/http/handlers"
+	"logs-hub-backend/pkg/http/handlers"
 
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"

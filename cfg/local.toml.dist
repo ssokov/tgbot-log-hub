@@ -7,7 +7,7 @@ EnableVFS = true
 [Database]
 Addr            = "localhost:5432"
 User            = "postgres"
-Database        = "tgbot-log-hub"
+Database        = "logs-hub-backend"
 Password        = ""
 PoolSize        = 5
-ApplicationName = "tgbot-log-hub"
+ApplicationName = "logs-hub-backend"

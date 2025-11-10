@@ -1,3 +1,3 @@
-# tgbot-log-hub 
+# logs-hub-backend 
 
 Run `make init` first.
