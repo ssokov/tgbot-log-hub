@@ -6,7 +6,7 @@ type ServiceResponse struct {
 	ID   string `json:"ID"`
 	Name string `json:"Name"`
 }
-// убрать response
+
 type LogsService struct {
 	Service ServiceResponse `json:"service"`
 	Logs    []Log   `json:"logs"`

@@ -2,14 +2,14 @@ package app
 
 import (
 	"context"
-	"github.com/vmkteam/zenrpc/v2"
 	"time"
+
+	"github.com/vmkteam/zenrpc/v2"
 
 	"logs-hub-backend/pkg/db"
 	"logs-hub-backend/pkg/http"
 
 	"github.com/go-pg/pg/v10"
-	monitor "github.com/hypnoglow/go-pg-monitor"
 	"github.com/labstack/echo/v4"
 	"github.com/vmkteam/embedlog"
 )
@@ -33,9 +33,9 @@ type App struct {
 	cfg     Config
 	db      db.DB
 	dbc     *pg.DB
-	mon     *monitor.Monitor
-	echo    *echo.Echo
-	srv     *zenrpc.Server
+	// mon     *monitor.Monitor
+	echo *echo.Echo
+	srv  *zenrpc.Server
 }
 
 func New(appName string, sl embedlog.Logger, cfg Config, db db.DB, dbc *pg.DB) *App {
@@ -62,6 +62,6 @@ func (a *App) Shutdown(timeout time.Duration) error {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 	//a.mon.Close()
-
+	
 	return a.echo.Shutdown(ctx)
 }
