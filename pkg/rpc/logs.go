@@ -23,7 +23,7 @@ func NewLogService(dbc db.DB, logger embedlog.Logger) *LogService {
 	}
 }
 
-func (ls *LogService) Get(ctx context.Context) ([]ServiceResponse, error) {
+func (ls LogService) Get(ctx context.Context) ([]ServiceResponse, error) {
 	services, err := ls.logManager.Get(ctx)
 	if err != nil {
 		return nil, err
@@ -32,7 +32,7 @@ func (ls *LogService) Get(ctx context.Context) ([]ServiceResponse, error) {
 	return newServices(services), nil
 }
 
-func (ls *LogService) GetLogsByServiceID(ctx context.Context, serviceID int) (LogsService, error) {
+func (ls LogService) GetLogsByServiceID(ctx context.Context, serviceID int) (LogsService, error) {
 
 	serviceLogs, err := ls.logManager.GetLogsService(ctx, serviceID)
 	if err != nil {

@@ -1,13 +1,12 @@
 package rpc
 
 import (
-	"log"
 	logshub "logs-hub-backend/pkg/logs-hub"
 	"strconv"
 )
 
 func newServices(services []logshub.Service) []ServiceResponse {
-	var res []ServiceResponse
+	res := make([]ServiceResponse, 0, len(services))
 	for _, service := range services {
 		res = append(res, newService(service))
 	}
@@ -24,17 +23,9 @@ func newService(service logshub.Service) ServiceResponse {
 func newLogServices(logService []logshub.ServiceLog) LogsService {
 	var serviceResponse ServiceResponse
 
-	log.Println("logService: ", logService)
-
 	serviceResponse.ID = strconv.Itoa(logService[0].ServiceID)
-	if logService[0].Service != nil {
-		serviceResponse.Name = logService[0].Service.Name
-	} else {
-		log.Println("AaAAAAAAAAAAAA")
-	}
-	// serviceResponse.Name = (logService[0].Service.Name)
-
-	var logs []Log
+	serviceResponse.Name = logService[0].Service.Name
+	logs := make([]Log, 0, len(logService))
 	for _, serviveLog := range logService {
 		logs = append(logs, newLog(serviveLog))
 	}
@@ -50,7 +41,7 @@ func newLog(serviceLog logshub.ServiceLog) Log {
 		ErrorCode: *serviceLog.ErrorCode,
 		Text:      *serviceLog.Message,
 		TgUserID:  int(*serviceLog.UserID),
-		// Params: serviceLog.User.Params,
+		// Params:    serviceLog.User.Params,
 		Date: serviceLog.CreatedAt,
 	}
 }
