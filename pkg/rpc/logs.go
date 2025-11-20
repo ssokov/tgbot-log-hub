@@ -34,7 +34,7 @@ func (ls *LogService) Get(ctx context.Context) ([]ServiceResponse, error) {
 
 func (ls *LogService) GetLogsByServiceID(ctx context.Context, serviceID int) (LogsService, error) {
 
-	serviceLogs, err := ls.logManager.GetLogsByServiceID(ctx, serviceID)
+	serviceLogs, err := ls.logManager.GetLogsService(ctx, serviceID)
 	if err != nil {
 		return LogsService{}, err
 	}

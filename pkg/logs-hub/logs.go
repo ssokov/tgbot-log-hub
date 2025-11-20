@@ -27,11 +27,11 @@ func NewLogManager(dbc db.DB, logger embedlog.Logger) *LogManager {
 	return &LogManager{dbc: dbc, Logger: logger, tlRepo: db.NewTgbotLogHubRepo(dbc)}
 }
 
-func (m LogManager) GetLogsByServiceID(ctx context.Context, serviceID int) ([]ServiceLog, error) {
+func (m LogManager) GetLogsService(ctx context.Context, serviceID int) ([]ServiceLog, error) {
 	logs, err := m.tlRepo.ServiceLogsByFilters(ctx, &db.ServiceLogSearch{ServiceID: &serviceID}, db.PagerNoLimit, m.tlRepo.FullServiceLog())
 
 	if err != nil {
-		m.Logger.Errorf("GetLogsByServiceID: failed to get logs by service id=%d: %v", serviceID, err)
+		m.Logger.Errorf("GetLogsService: failed to get logs by service id=%d: %v", serviceID, err)
 		return nil, err
 	}
 
