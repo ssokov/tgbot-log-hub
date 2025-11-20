@@ -2,10 +2,11 @@ package rpc
 
 import (
 	"context"
-	"github.com/vmkteam/embedlog"
-	"github.com/vmkteam/zenrpc/v2"
 	"logs-hub-backend/pkg/db"
 	logshub "logs-hub-backend/pkg/logs-hub"
+
+	"github.com/vmkteam/embedlog"
+	"github.com/vmkteam/zenrpc/v2"
 )
 
 type LogService struct {
@@ -22,7 +23,7 @@ func NewLogService(dbc db.DB, logger embedlog.Logger) *LogService {
 	}
 }
 
-func (ls *LogService) Get(ctx context.Context) ([]Service, error) {
+func (ls *LogService) Get(ctx context.Context) ([]ServiceResponse, error) {
 	services, err := ls.logManager.Get(ctx)
 	if err != nil {
 		return nil, err
@@ -30,3 +31,14 @@ func (ls *LogService) Get(ctx context.Context) ([]Service, error) {
 
 	return newServices(services), nil
 }
+
+func (ls *LogService) GetLogsByServiceID(ctx context.Context, serviceID int) (LogsService, error) {
+
+	serviceLogs, err := ls.logManager.GetLogsByServiceID(ctx, serviceID)
+	if err != nil {
+		return LogsService{}, err
+	}
+
+	return newLogServices(serviceLogs), err
+}
+

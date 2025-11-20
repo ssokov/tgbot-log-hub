@@ -29,10 +29,10 @@ func NewRouter() *echo.Echo {
 	// Service routes
 	serviceGroup.POST("/register", serviceHandler.Register)
 	serviceGroup.GET("/apikey", serviceHandler.GetAPIKey)
-	serviceGroup.GET("", serviceHandler.GetServices)
+	// serviceGroup.GET("", serviceHandler.GetServices)
 	// serviceGroup.PUT("/:id", serviceHandler.UpdateService)
 	serviceGroup.DELETE("/:id", serviceHandler.DeleteService)
-	serviceGroup.GET("/:id/logs", serviceHandler.GetLog)
+	// serviceGroup.GET("/:id/logs", serviceHandler.GetLog)
 	serviceGroup.POST("/:id/logs/filter", serviceHandler.GetLogByFilter)
 
 	return e

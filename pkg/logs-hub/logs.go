@@ -2,8 +2,9 @@ package logs_hub
 
 import (
 	"context"
-	"github.com/vmkteam/embedlog"
 	"logs-hub-backend/pkg/db"
+
+	"github.com/vmkteam/embedlog"
 )
 
 type LogManager struct {
@@ -24,4 +25,15 @@ func (m LogManager) Get(ctx context.Context) ([]Service, error) {
 
 func NewLogManager(dbc db.DB, logger embedlog.Logger) *LogManager {
 	return &LogManager{dbc: dbc, Logger: logger, tlRepo: db.NewTgbotLogHubRepo(dbc)}
+}
+
+func (m LogManager) GetLogsByServiceID(ctx context.Context, serviceID int) ([]ServiceLog, error) {
+	logs, err := m.tlRepo.ServiceLogsByFilters(ctx, &db.ServiceLogSearch{ServiceID: &serviceID}, db.PagerNoLimit, m.tlRepo.FullServiceLog())
+
+	if err != nil {
+		m.Logger.Errorf("GetLogsByServiceID: failed to get logs by service id=%d: %v", serviceID, err)
+		return nil, err
+	}
+
+	return newLogServices(logs), err
 }

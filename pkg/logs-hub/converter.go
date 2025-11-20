@@ -13,3 +13,16 @@ func newServices(services []db.Service) []Service {
 func newService(service db.Service) Service {
 	return Service(service)
 }
+
+func newLogServices(serviceLogs []db.ServiceLog) []ServiceLog {
+	var res []ServiceLog
+
+	for _, servserviceLog := range serviceLogs {
+		res = append(res, newLogService(servserviceLog))
+	}
+	return res
+}
+
+func newLogService(serviceLog db.ServiceLog) ServiceLog {
+	return ServiceLog(serviceLog)
+}

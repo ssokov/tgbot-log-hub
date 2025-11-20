@@ -29,18 +29,8 @@ type StatusResponse struct {
 	Status string `json:"status" example:"ok"`
 }
 
-type LogResponse struct {
-	Type      string                 `json:"type" example:"error"`
-	ErrorCode int                    `json:"error_code" example:"500"`
-	Text      string                 `json:"message" example:"invalid tg_id"`
-	TgUserID  int                    `json:"tg_user_id" example:"123456789"`
-	Params    map[string]interface{} `json:"params,omitempty" swaggertype:"object"`
-	Date      time.Time              `json:"timestamp" example:"2025-10-22T12:34:56Z"`
-}
-type LogListResponse struct {
-	Service ServiceResponse `json:"service"`
-	Logs    []LogResponse   `json:"logs"`
-}
+
+
 type LogSearchResponse struct {
 	Type      string    `json:"type,omitempty" example:"error"`
 	ErrorCode int       `json:"error_code,omitempty" example:"500"`
@@ -157,40 +147,40 @@ func (h *ServiceHandler) DeleteService(c echo.Context) error {
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /services/{id}/logs [get]
-func (h *ServiceHandler) GetLog(c echo.Context) error {
-	sr := ServiceResponse{
-		ID:   "1",
-		Name: "ludomania",
-	}
-	lr := []LogResponse{
-		{
-			Type:      "Error",
-			ErrorCode: 400,
-			Text:      "invalid user id",
-			TgUserID:  510330583,
-			Date:      time.Now(),
-		},
-		{
-			Type:      "Notification",
-			ErrorCode: 200,
-			Text:      "user @Msokovv buy new mouse",
-			TgUserID:  510330583,
-			Params: map[string]interface{}{
-				"wireless":         true,
-				"price":            13500,
-				"second_name_user": "Mikjail", // лучше использовать snake_case без пробелов
-			},
-			Date: time.Now(),
-		},
-	}
+// func (h *ServiceHandler) GetLog(c echo.Context) error {
+// 	sr := ServiceResponse{
+// 		ID:   "1",
+// 		Name: "ludomania",
+// 	}
+// 	lr := []LogResponse{
+// 		{
+// 			Type:      "Error",
+// 			ErrorCode: 400,
+// 			Text:      "invalid user id",
+// 			TgUserID:  510330583,
+// 			Date:      time.Now(),
+// 		},
+// 		{
+// 			Type:      "Notification",
+// 			ErrorCode: 200,
+// 			Text:      "user @Msokovv buy new mouse",
+// 			TgUserID:  510330583,
+// 			Params: map[string]interface{}{
+// 				"wireless":         true,
+// 				"price":            13500,
+// 				"second_name_user": "Mikjail", 
+// 			},
+// 			Date: time.Now(),
+// 		},
+// 	}
 
-	llr := LogListResponse{
-		Service: sr,
-		Logs:    lr,
-	}
+// 	llr := LogListResponse{
+// 		Service: sr,
+// 		Logs:    lr,
+// 	}
 
-	return c.JSON(http.StatusOK, llr)
-}
+// 	return c.JSON(http.StatusOK, llr)
+// }
 
 // GetLogByFilter godoc
 // @Summary Get logs with filters

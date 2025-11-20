@@ -11,10 +11,11 @@ import (
 )
 
 var RPC = struct {
-	LogService struct{ Get string }
+	LogService struct{ Get, GetLogsByServiceID string }
 }{
-	LogService: struct{ Get string }{
-		Get: "get",
+	LogService: struct{ Get, GetLogsByServiceID string }{
+		Get:                "get",
+		GetLogsByServiceID: "getlogsbyserviceid",
 	},
 }
 
@@ -46,6 +47,76 @@ func (LogService) SMD() smd.ServiceInfo {
 					},
 				},
 			},
+			"GetLogsByServiceID": {
+				Parameters: []smd.JSONSchema{
+					{
+						Name: "serviceID",
+						Type: smd.Integer,
+					},
+				},
+				Returns: smd.JSONSchema{
+					Type:     smd.Object,
+					TypeName: "LogServiceResponse",
+					Properties: smd.PropertyList{
+						{
+							Name: "service",
+							Ref:  "#/definitions/ServiceResponse",
+							Type: smd.Object,
+						},
+						{
+							Name: "logs",
+							Type: smd.Array,
+							Items: map[string]string{
+								"$ref": "#/definitions/LogResponse",
+							},
+						},
+					},
+					Definitions: map[string]smd.Definition{
+						"ServiceResponse": {
+							Type: "object",
+							Properties: smd.PropertyList{
+								{
+									Name: "ID",
+									Type: smd.String,
+								},
+								{
+									Name: "Name",
+									Type: smd.String,
+								},
+							},
+						},
+						"LogResponse": {
+							Type: "object",
+							Properties: smd.PropertyList{
+								{
+									Name: "type",
+									Type: smd.String,
+								},
+								{
+									Name: "error_code",
+									Type: smd.Integer,
+								},
+								{
+									Name: "message",
+									Type: smd.String,
+								},
+								{
+									Name: "tg_user_id",
+									Type: smd.Integer,
+								},
+								{
+									Name: "params",
+									Type: smd.Object,
+								},
+								{
+									Name: "timestamp",
+									Type: smd.String,
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -53,10 +124,30 @@ func (LogService) SMD() smd.ServiceInfo {
 // Invoke is as generated code from zenrpc cmd
 func (s LogService) Invoke(ctx context.Context, method string, params json.RawMessage) zenrpc.Response {
 	resp := zenrpc.Response{}
+	var err error
 
 	switch method {
 	case RPC.LogService.Get:
 		resp.Set(s.Get(ctx))
+
+	case RPC.LogService.GetLogsByServiceID:
+		var args = struct {
+			ServiceID int `json:"serviceID"`
+		}{}
+
+		if zenrpc.IsArray(params) {
+			if params, err = zenrpc.ConvertToObject([]string{"serviceID"}, params); err != nil {
+				return zenrpc.NewResponseError(nil, zenrpc.InvalidParams, "", err.Error())
+			}
+		}
+
+		if len(params) > 0 {
+			if err := json.Unmarshal(params, &args); err != nil {
+				return zenrpc.NewResponseError(nil, zenrpc.InvalidParams, "", err.Error())
+			}
+		}
+
+		resp.Set(s.GetLogsByServiceID(ctx, args.ServiceID))
 
 	default:
 		resp = zenrpc.NewResponseError(nil, zenrpc.MethodNotFound, "", nil)

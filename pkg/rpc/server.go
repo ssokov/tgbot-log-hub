@@ -35,7 +35,7 @@ func New(dbo db.DB, logger embedlog.Logger, isDevel bool) *zenrpc.Server {
 		AllowCORS: false,
 	})
 
-	rpc.Use(
+	rpc.Use(	
 		zm.WithDevel(isDevel),
 		zm.WithNoCancelContext(),
 		zm.WithMetrics(zm.DefaultServerName),
