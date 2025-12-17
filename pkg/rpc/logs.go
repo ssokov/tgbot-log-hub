@@ -9,6 +9,10 @@ import (
 	"github.com/vmkteam/zenrpc/v2"
 )
 
+const (
+	TelegramUpdateType = "Telegram Update"
+)
+
 type LogService struct {
 	zenrpc.Service
 	embedlog.Logger
@@ -42,3 +46,13 @@ func (ls LogService) GetLogsByServiceID(ctx context.Context, serviceID int) (Log
 	return newLogServices(serviceLogs), err
 }
 
+func (ls LogService) AddTelegramLog(ctx context.Context, log LogReq) error {
+
+	serviceLog := newServiceLog(log)
+	if err := ls.logManager.AddLog(ctx, log.Type, serviceLog); err != nil {
+		ls.Logger.Errorf("AddTelegramLog: failed to add log: %v", err)
+		return err
+	}
+
+	return nil
+}

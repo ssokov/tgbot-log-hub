@@ -7,7 +7,7 @@ require (
 	github.com/getsentry/sentry-go v0.35.3
 	github.com/go-pg/pg/v10 v10.15.0
 	github.com/go-pg/urlstruct v1.0.1
-	github.com/hypnoglow/go-pg-monitor v1.2.0
+	github.com/go-telegram/bot v1.17.0
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/namsral/flag v1.7.4-pre
 	github.com/swaggo/swag v1.8.12
@@ -35,7 +35,6 @@ require (
 	github.com/vmkteam/meta-schema/v2 v2.0.1 // indirect
 	github.com/vmkteam/zenrpc v1.1.1 // indirect
 	golang.org/x/crypto v0.42.0 // indirect
-	golang.org/x/time v0.11.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 

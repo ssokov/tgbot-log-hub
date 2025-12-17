@@ -23,5 +23,16 @@ func newLogServices(serviceLogs []db.ServiceLog) []ServiceLog {
 }
 
 func newLogService(serviceLog db.ServiceLog) ServiceLog {
+	
 	return ServiceLog(serviceLog)
+}
+
+func newDBServiceLog(log ServiceLog, typeID int, userID *int64, ) db.ServiceLog {
+	dbLog := db.ServiceLog(log)
+	dbLog.TypeID = typeID
+	dbLog.UserID = userID
+
+	dbLog.ServiceID = 1
+	dbLog.TypeID = 1
+	return dbLog
 }

@@ -11,11 +11,12 @@ import (
 )
 
 var RPC = struct {
-	LogService struct{ Get, GetLogsByServiceID string }
+	LogService struct{ Get, GetLogsByServiceID, AddTelegramLog string }
 }{
-	LogService: struct{ Get, GetLogsByServiceID string }{
+	LogService: struct{ Get, GetLogsByServiceID, AddTelegramLog string }{
 		Get:                "get",
 		GetLogsByServiceID: "getlogsbyserviceid",
+		AddTelegramLog:     "addtelegramlog",
 	},
 }
 
@@ -56,7 +57,7 @@ func (LogService) SMD() smd.ServiceInfo {
 				},
 				Returns: smd.JSONSchema{
 					Type:     smd.Object,
-					TypeName: "LogServiceResponse",
+					TypeName: "LogsService",
 					Properties: smd.PropertyList{
 						{
 							Name: "service",
@@ -67,7 +68,7 @@ func (LogService) SMD() smd.ServiceInfo {
 							Name: "logs",
 							Type: smd.Array,
 							Items: map[string]string{
-								"$ref": "#/definitions/LogResponse",
+								"$ref": "#/definitions/Log",
 							},
 						},
 					},
@@ -85,7 +86,7 @@ func (LogService) SMD() smd.ServiceInfo {
 								},
 							},
 						},
-						"LogResponse": {
+						"Log": {
 							Type: "object",
 							Properties: smd.PropertyList{
 								{
@@ -105,13 +106,48 @@ func (LogService) SMD() smd.ServiceInfo {
 									Type: smd.Integer,
 								},
 								{
-									Name: "params",
-									Type: smd.Object,
+									Name: "tg_nickname",
+									Type: smd.String,
+								},
+								{
+									Name: "service_name",
+									Type: smd.String,
 								},
 								{
 									Name: "timestamp",
 									Type: smd.String,
 								},
+							},
+						},
+					},
+				},
+			},
+			"AddTelegramLog": {
+				Parameters: []smd.JSONSchema{
+					{
+						Name:     "log",
+						Type:     smd.Object,
+						TypeName: "LogReq",
+						Properties: smd.PropertyList{
+							{
+								Name: "type",
+								Type: smd.String,
+							},
+							{
+								Name: "message",
+								Type: smd.String,
+							},
+							{
+								Name: "tg_user_id",
+								Type: smd.Integer,
+							},
+							{
+								Name: "tg_nickname",
+								Type: smd.String,
+							},
+							{
+								Name: "service_name",
+								Type: smd.String,
 							},
 						},
 					},
@@ -148,6 +184,25 @@ func (s LogService) Invoke(ctx context.Context, method string, params json.RawMe
 		}
 
 		resp.Set(s.GetLogsByServiceID(ctx, args.ServiceID))
+
+	case RPC.LogService.AddTelegramLog:
+		var args = struct {
+			Log LogReq `json:"log"`
+		}{}
+
+		if zenrpc.IsArray(params) {
+			if params, err = zenrpc.ConvertToObject([]string{"log"}, params); err != nil {
+				return zenrpc.NewResponseError(nil, zenrpc.InvalidParams, "", err.Error())
+			}
+		}
+
+		if len(params) > 0 {
+			if err := json.Unmarshal(params, &args); err != nil {
+				return zenrpc.NewResponseError(nil, zenrpc.InvalidParams, "", err.Error())
+			}
+		}
+
+		resp.Set(s.AddTelegramLog(ctx, args.Log))
 
 	default:
 		resp = zenrpc.NewResponseError(nil, zenrpc.MethodNotFound, "", nil)
